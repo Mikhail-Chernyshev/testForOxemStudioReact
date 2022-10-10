@@ -1,14 +1,30 @@
 .data__sum {
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 24px;
   font-size: 1.9em;
   color: #575757;
   background-color: #F3F3F4;
   border: none;
-  grid-column: 2/3;
-  grid-row: 5/8;
+  grid-row: 3/11;
+  grid-column: 1/8;
   text-align: left;
   line-height: 42px;
+  border-radius: 16px;
+}
+.data__sum:focus {
+  background-color: #FFFFFF;
+  border: 2px solid #F3F3F4;
+  outline: none;
+}
+.data__sum::-webkit-outer-spin-button,
+.data__sum::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    /* margin: 0; <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
 }
 @media screen and (max-width: 767px) {
   .data__sum {

@@ -1,3 +1,14 @@
 .order__submit_loading {
-    
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff9514;
+  border: 2px solid #FFFFFF;
+  opacity: 1;
+  z-index: 3;
 }

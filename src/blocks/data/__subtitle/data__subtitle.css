@@ -1,7 +1,6 @@
 .data__subtitle {
     margin: 0;
     padding: 0;
-    height: 20px;
     width: 192px;
     grid-row: 1/2;
     grid-column: 1/3;

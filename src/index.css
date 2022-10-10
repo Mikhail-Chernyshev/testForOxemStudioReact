@@ -8,8 +8,8 @@
 @import url(./blocks/data/__subtitle/data__subtitle.css);
 @import url(./blocks/data/__sum/data__sum.css);
 @import url(./blocks/data/__attribute/_valut/data__attribute_valut.css);
-@import url(./blocks/data/__background/data__background.css);
-@import url(./blocks/data/__line/data__line.css);
+/* @import url(./blocks/data/__background/data__background.css); */
+/* @import url(./blocks/data/__line/data__line.css); */
 @import url(./blocks/data/__range/data__range.css);
 @import url(./blocks/data/__ellipse/data__ellipse.css);
 @import url(./blocks/data/__attribute/_procents/data__attribute_procents.css);
@@ -21,3 +21,4 @@
 @import url(./blocks/order/__subtitle/_shadow/order__subtitle_shadow.css);
 @import url(./blocks/order/__sum/_shadow/order__sum_shadow.css);
 @import url(./blocks/order/__submit/order__submit.css);
+/* @import url(./blocks/data/__form/data__form.css); */
