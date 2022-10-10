@@ -1,0 +1,12 @@
+.data__attribute_procents {
+  width: 40px;
+  height: 29px;
+  font-size: 20px;
+  grid-row: 4/8;
+  background-color: #EBEBEC;
+  padding: 10px;
+  grid-column: 4/8;
+  border-radius: 16px;
+  line-height: 30px;
+  border: none;
+}

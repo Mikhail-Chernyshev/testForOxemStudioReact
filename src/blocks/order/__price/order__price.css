@@ -1,0 +1,28 @@
+.order__price {
+  margin: 0 180px 0 0;
+  padding: 0;
+  width: 279px;
+  height: 81px;
+}
+
+@media screen and (max-width: 1439px) {
+  .order__price {
+    margin-right: 73px;
+  }
+}
+
+@media screen and (max-width: 1119px) {
+  .order__price {
+    width: 332px;
+    margin-right: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .order__price {
+    width: 167px;
+    height: 41px;
+    border: 1px solid blue;
+    margin-bottom: 20px;
+  }
+}

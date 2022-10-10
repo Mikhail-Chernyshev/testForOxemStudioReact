@@ -1,0 +1,18 @@
+.data__sum {
+  margin: 0;
+  padding: 0;
+  font-size: 1.9em;
+  color: #575757;
+  background-color: #F3F3F4;
+  border: none;
+  grid-column: 2/3;
+  grid-row: 5/8;
+  text-align: left;
+  line-height: 42px;
+}
+@media screen and (max-width: 767px) {
+  .data__sum {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}

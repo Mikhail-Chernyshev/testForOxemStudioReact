@@ -1,0 +1,19 @@
+.data {
+    margin: 0 0 44px 47px;
+    padding: 0;
+    display: flex;
+}
+  
+  @media screen and (max-width: 1119px) {
+    .data {
+        flex-direction: column;
+        margin: 0 0 36px 36px;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .data {
+      margin: 0px 20px 16px 20px;
+    }
+  }
+  

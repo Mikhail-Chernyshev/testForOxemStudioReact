@@ -1,0 +1,16 @@
+.order {
+  margin: 0 0 0 47px;
+  padding: 0;
+  display: flex;
+}
+@media screen and (max-width: 1119px) {
+  .order {
+    margin-left: 36px;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 767px) {
+  .order {
+    margin-left: 20px;
+  }
+}

@@ -1,0 +1,33 @@
+.order__submit {
+  margin: auto 0;
+  padding: 0;
+  width: 426px;
+  height: 68px;
+  background-color: #ff9514;
+  border: none;
+  border-radius: 40px;
+  font-size: 1.9em;
+  line-height: 36px;
+  color: #ffffff;
+}
+@media screen and (max-width: 1439px) {
+  .order__submit {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 1119px) {
+  .order__submit {
+    margin-top: 44px;
+    width: 345px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .order__submit {
+    width: 280px;
+    height: 60px;
+    line-height: 20px;
+    font-size: 1.25em;
+  }
+}
