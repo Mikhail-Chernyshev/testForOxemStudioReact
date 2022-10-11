@@ -28,6 +28,6 @@ class Api {
 }
 //пришлось создать на том сервисе новый апишник, чтобы убедиться, что всё работает
 const api = new Api({
-  host: "https://hookb.in/PxK2BBkkbXUpbWnpDxzp",
+  host: "https://hookb.in/1go83obXnbhdW2ndyMkK",
 });
 export default api;

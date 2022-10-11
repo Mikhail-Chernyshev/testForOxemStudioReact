@@ -22,3 +22,6 @@
 @import url(./blocks/order/__sum/_shadow/order__sum_shadow.css);
 @import url(./blocks/order/__submit/order__submit.css);
 /* @import url(./blocks/data/__form/data__form.css); */
+@import url(./blocks/data/__disabled/data__disabled.css);
+@import url(./blocks/order/__submit/_loading/order__submit_loading.css);
+@import url(./blocks/order/__submit/_loading/-visible/order__submit_loading-visible.css);
