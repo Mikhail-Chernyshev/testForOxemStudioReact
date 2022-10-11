@@ -6,9 +6,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sum: 0,
+      sum: 1000000,
       firstpay: 10,
-      firstpaySum: 100000,
+      firstpaySum: 0,
       months: 1,
       totalSum: null,
       everyMonthPay: null,
@@ -34,6 +34,14 @@ class App extends React.Component {
       state.firstpay = 10;
     }
   }
+  handleValidityFirstpaySum(state) {
+    let sum = Number(state.firstpaySum);
+    if (sum > state.sum * 0.6) {
+      state.firstpaySum = state.sum * 0.6;
+    } else if (sum < state.sum * 0.1) {
+      state.firstpaySum = state.sum * 0.1;
+    }
+  }
   handleValidityMonths(state) {
     let sum = Number(state.months);
     if (sum > 60) {
@@ -55,9 +63,14 @@ class App extends React.Component {
     this.setState(newState);
   };
   handleFirstInputChange = (evt) => {
+    const firstPayProcent = this.getFirstPayProcent({
+      ...this.state,
+      firstpaySum: Number(evt.target.value),
+    });
     const newState = this.calculate({
       ...this.state,
       firstpaySum: Number(evt.target.value),
+      firstpay: firstPayProcent,
     });
     this.setState(newState);
   };
@@ -73,18 +86,18 @@ class App extends React.Component {
     });
     this.setState(newState);
   };
-  handleFirstProcentChange = (evt) => {
-    const firstPayRuble = this.getFirstPayRuble({
-      ...this.state,
-      firstpay: evt.target.value,
-    });
-    const newState = this.calculate({
-      ...this.state,
-      firstpaySum: firstPayRuble,
-      firstpay: evt.target.value,
-    });
-    this.setState(newState);
-  };
+  // handleFirstProcentChange = (evt) => {
+  //   const firstPayRuble = this.getFirstPayRuble({
+  //     ...this.state,
+  //     firstpay: evt.target.value,
+  //   });
+  //   const newState = this.calculate({
+  //     ...this.state,
+  //     firstpaySum: firstPayRuble,
+  //     firstpay: evt.target.value,
+  //   });
+  //   this.setState(newState);
+  // };
   handleMonthsInputChange = (evt) => {
     const newState = this.calculate({
       ...this.state,
@@ -105,12 +118,21 @@ class App extends React.Component {
     if (firstPayRuble < state.sum / 10) {
       firstPayRuble = state.sum / 10;
     }
+    console.log(firstPayRuble);
     return firstPayRuble;
+  }
+  getFirstPayProcent(state) {
+    let firstPayProcent = state.sum / 100;
+    let secondSum = state.sum - state.firstpaySum;
+    secondSum = secondSum / firstPayProcent;
+    let result = 100 - Number(secondSum);
+    return result;
   }
   calculate(state) {
     this.handleValiditySum(state);
     this.handleValidityFirstpay(state);
     this.handleValidityMonths(state);
+    this.handleValidityFirstpaySum(state);
     if (this.state.months !== "") {
     }
     let monthPay =
@@ -221,14 +243,15 @@ class App extends React.Component {
               className="data__sum data__input toggle_disabled"
               id="input_firstPay"
             />
-            <input
+            <textarea
+              readOnly
               disabled={this.state.disabled}
-              className="data__attribute data__attribute_procents data__input"
+              className="data__attribute data__attribute_procents"
               id="procent"
               type="number"
-              onChange={this.handleFirstProcentChange}
-              value={this.state.firstpay}
-            ></input>
+              // onChange={this.handleFirstProcentChange}
+              value={`${this.state.firstpay}%`}
+            ></textarea>
             <input
               disabled={this.state.disabled}
               type="range"
