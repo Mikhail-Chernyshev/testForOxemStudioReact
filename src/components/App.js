@@ -17,6 +17,7 @@ class App extends React.Component {
       clickClass: "",
       isLoading: "",
     };
+    // this.handleSetLoading = this.handleSetLoading.bind(this)
   }
   handleValiditySum(state) {
     let sum = Number(state.sum);
@@ -158,6 +159,7 @@ class App extends React.Component {
     });
     this.setState(newState);
   }
+  
   handleAddClassDisabled(visibiletyClass, clickClass) {
     const newState = this.calculate({
       ...this.state,
@@ -167,28 +169,25 @@ class App extends React.Component {
     this.setState(newState);
   }
   handleSetLoading(data) {
-    const newState = this.calculate({
-      ...this.state,
+    // const newState = this.calculate({
+    //   ...this.state,
+    //   isLoading: data,
+    // });
+    // this.setState(newState);
+    this.setState({
       isLoading: data,
     });
-    this.setState(newState);
   }
-  handleSubmit(data) {
-    // evt.preventDefault();
-    // buttonSubmit.classList.add("order__submit_click");
-    // elementActive(elementsToggleDisabled, true);
-    // setLoading(true);
+
+  handleAddPlaceSubmit(place) {
+    // this.handleSetLoading();
     api
-      .addData(data)
+      .addData(place)
       .catch((err) => {
-        console.log(`Error: ${err}`);
+        console.error(err);
       })
       .finally(() => {
-        // buttonSubmit.classList.remove("order__submit_click");
-        // setTimeout(() => {
-        //   elementActive(elementsToggleDisabled);
-        // }, 500);
-        // setLoading(false);
+        this.handleSetLoading(false);
       });
   }
   render() {
@@ -310,24 +309,13 @@ class App extends React.Component {
               {this.state.everyMonthPay}
             </h4>
           </div>
-          {/* <button
-            type="submit"
-            className={`order__submit order__submit_hover toggle_disabled  ${this.props.disabledClass} ${this.props.clickClass}`}
-            id="submit"
-            onSubmit={this.handleSubmit(this.state)}
-          >
-            {this.props.isLoading ? "" : "Оставить заявку"}
-            <div
-              className={`order__submit_loading ${
-                this.props.isLoading ? "order__submit_loading-visible" : " "
-              }`}
-            ></div>
-          </button> */}
+
           <ButtonSubmit
             state={this.state}
+            handleSetLoading={this.handleSetLoading}
             // onLoading={this.handleSetLoading}
             isLoading={this.state.isLoading}
-            onClick={this.handlePostData}
+            onClick={this.handleAddPlaceSubmit}
             disabledClass={this.state.disabledClass}
             clickClass={this.state.clickClass}
           />
@@ -339,24 +327,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// handleUserInput = (e) => {
-//   const name = e.target.name;
-//   const value = e.target.value;
-//   this.setState({[name]: value});
-// }
-// function handleUpdateAvatar(user) {
-//   setIsLoading(true);
-//   api
-//     .editAvatar(user)
-//     .then((updateAvatar) => {
-//       setCurrentUser(updateAvatar);
-//       closeAllPopups();
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     })
-//     .finally(() => {
-//       setIsLoading(false);
-//     });
-// }

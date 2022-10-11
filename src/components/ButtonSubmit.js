@@ -4,20 +4,14 @@ import api from "../utils/Api";
 class ButtonSubmit extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this)
+
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    api
-      .addData(this.props.state)
-      .then((addedData) => {
-        console.log(addedData);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        console.log("pipka");
-      });
+    this.props.handleSetLoading(true);
+    this.props.onClick();
+
   }
 
   render() {
@@ -27,7 +21,7 @@ class ButtonSubmit extends React.Component {
           type="click"
           className={`order__submit order__submit_hover toggle_disabled  ${this.props.disabledClass} ${this.props.clickClass}`}
           id="submit"
-          onClick={this.handlePostData}
+          onClick={this.handleSubmit}
         >
           {this.props.isLoading ? "" : "Оставить заявку"}
           <div
