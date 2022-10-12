@@ -3,7 +3,7 @@
   padding: 0;
   background-color: #ffffff;
   width: 1440px;
-  height: 800px;
+  border: 1px solid red;
   font-family: "Nekst-Black", Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;

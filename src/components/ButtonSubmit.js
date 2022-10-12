@@ -14,7 +14,7 @@ class ButtonSubmit extends React.Component {
       <>
         <button
           type="click"
-          className={`order__submit order__submit_hover toggle_disabled  ${this.props.state.disabledClass} ${this.props.state.clickClass}`}
+          className={`order__submit  ${this.props.state.disabledClass} ${this.props.state.clickClass}`}
           id="submit"
           onClick={this.handleSubmit}
         >

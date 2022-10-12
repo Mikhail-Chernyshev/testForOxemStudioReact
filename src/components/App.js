@@ -86,7 +86,6 @@ class App extends React.Component {
     if (firstPayRuble < state.sum / 10) {
       firstPayRuble = state.sum / 10;
     }
-    console.log(firstPayRuble);
     return firstPayRuble;
   }
   getFirstPayProcent(state) {
@@ -165,7 +164,7 @@ class App extends React.Component {
               value={this.state.sum}
               onChange={this.handleChange}
               step="10000"
-              className="data__range toggle_disabled"
+              className="data__range "
               id="range_price"
             />
           </div>
@@ -177,7 +176,7 @@ class App extends React.Component {
               placeholder="0"
               value={this.state.firstpaySum}
               onChange={this.handleFirstInputChange}
-              className="data__sum data__input toggle_disabled"
+              className="data__sum data__input "
               id="input_firstPay"
             />
             <p
@@ -195,7 +194,7 @@ class App extends React.Component {
               step="1"
               value={this.state.firstpay}
               onChange={this.handleFirstRangeChange}
-              className="data__range toggle_disabled"
+              className="data__range"
               id="range_firstPay"
             />
           </div>
@@ -208,7 +207,7 @@ class App extends React.Component {
               value={this.state.months}
               onChange={this.handleChange}
               placeholder="0"
-              className="data__sum data__input toggle_disabled"
+              className="data__sum data__input "
               id="input_months"
             />
             <p className="data__attribute data__attribute_valut">мес.</p>

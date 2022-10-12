@@ -17,6 +17,7 @@
 
 @media screen and (max-width: 1119px) {
   .data__item {
+    margin-bottom: 36px;
     width: 696px;
     grid-template-columns: 24px 150px 435px 28px 15px 20px 24px;
   }
@@ -24,6 +25,7 @@
 
 @media screen and (max-width: 767px) {
   .data__item {
+    margin-bottom: 16px;
     width: 280px;
     grid-template-columns: 20px 150px 27px 28px 15px 20px 20px;
     height: 96px;
