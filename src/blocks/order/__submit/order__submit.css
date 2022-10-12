@@ -33,11 +33,12 @@
     font-size: 1.25em;
   }
 }
-
 .order__submit:hover {
   background-color: #111111;
   z-index: 2;
 }
+
+
 .order__submit:hover::after {
   background-color: #ff9514;
   z-index: 2;

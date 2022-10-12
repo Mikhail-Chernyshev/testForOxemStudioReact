@@ -11,6 +11,7 @@
   top: 20%;
   background: #ff9514;
   border: 2px solid #FFFFFF;
+  border-right: none;
   opacity: 0;
   z-index: 3;
 }

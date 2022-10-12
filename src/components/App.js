@@ -12,12 +12,11 @@ class App extends React.Component {
       months: 1,
       totalSum: null,
       everyMonthPay: null,
-      disabled: 0,
+      disabled: false,
       disabledClass: "",
       clickClass: "",
-      isLoading: "",
+      isLoading: false,
     };
-    // this.handleSetLoading = this.handleSetLoading.bind(this)
   }
   handleValiditySum(state) {
     let sum = Number(state.sum);
@@ -49,20 +48,14 @@ class App extends React.Component {
       state.months = 60;
     } else if (sum < 1) state.months = 1;
   }
-  handleSumInputChange = (evt) => {
+  handleChange = (evt) => {
     const newState = this.calculate({
       ...this.state,
-      sum: evt.target.value,
+      [evt.target.name]: Number(evt.target.value),
     });
     this.setState(newState);
   };
-  handleSumRangeChange = (evt) => {
-    const newState = this.calculate({
-      ...this.state,
-      sum: Number(evt.target.value),
-    });
-    this.setState(newState);
-  };
+
   handleFirstInputChange = (evt) => {
     const firstPayProcent = this.getFirstPayProcent({
       ...this.state,
@@ -84,32 +77,6 @@ class App extends React.Component {
       ...this.state,
       firstpaySum: firstPayRuble,
       firstpay: Number(evt.target.value),
-    });
-    this.setState(newState);
-  };
-  // handleFirstProcentChange = (evt) => {
-  //   const firstPayRuble = this.getFirstPayRuble({
-  //     ...this.state,
-  //     firstpay: evt.target.value,
-  //   });
-  //   const newState = this.calculate({
-  //     ...this.state,
-  //     firstpaySum: firstPayRuble,
-  //     firstpay: evt.target.value,
-  //   });
-  //   this.setState(newState);
-  // };
-  handleMonthsInputChange = (evt) => {
-    const newState = this.calculate({
-      ...this.state,
-      months: Number(evt.target.value),
-    });
-    this.setState(newState);
-  };
-  handleMonthsRangeChange = (evt) => {
-    const newState = this.calculate({
-      ...this.state,
-      months: Number(evt.target.value),
     });
     this.setState(newState);
   };
@@ -152,65 +119,40 @@ class App extends React.Component {
       totalSum: totalResult,
     };
   }
-  handleDisabled(data) {
-    const newState = this.calculate({
-      ...this.state,
-      disabled: data,
-    });
-    this.setState(newState);
-  }
-  
-  handleAddClassDisabled(visibiletyClass, clickClass) {
-    const newState = this.calculate({
-      ...this.state,
-      disabledClass: visibiletyClass,
-      clickClass: clickClass,
-    });
-    this.setState(newState);
-  }
-  handleSetLoading(data) {
-    // const newState = this.calculate({
-    //   ...this.state,
-    //   isLoading: data,
-    // });
-    // this.setState(newState);
+  handleDisabled = (data, addDisabled, addClicked) => {
     this.setState({
+      disabled: data,
       isLoading: data,
+      disabledClass: addDisabled,
+      clickClass: addClicked,
     });
-  }
+  };
 
-  handleAddPlaceSubmit(place) {
-    // this.handleSetLoading();
-    api
-      .addData(place)
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        this.handleSetLoading(false);
-      });
-  }
+  handleButtonClick = () => {
+    this.handleDisabled(true, "data__disabled", "order__submit_click");
+    api.addData(this.state);
+    setTimeout(() => {
+      this.handleDisabled(false, "", "");
+    }, 2000);
+  };
+
   render() {
     return (
       <div className="main">
-        <h1 className="main__title" onClick={this.submitsubmit}>
+        <h1 className="main__title">
           Рассчитайте стоимость автомобиля в лизинг
         </h1>
         <div className="data">
-          <div
-            className={`data__item toggle_disabled ${this.state.disabledClass}`}
-          >
+          <div className={`data__item  ${this.state.disabledClass}`}>
             <h3 className="data__subtitle">Стоимость автомобиля</h3>
             <input
               disabled={this.state.disabled}
-              min="1000000"
-              max="6000000"
               name="sum"
               type="number"
               value={this.state.sum}
-              onChange={this.handleSumInputChange}
+              onChange={this.handleChange}
               placeholder="0"
-              className="data__sum data__input toggle_disabled"
+              className="data__sum data__input"
               id="input_price"
             />
             <p className="data__attribute data__attribute_valut">₽</p>
@@ -219,22 +161,18 @@ class App extends React.Component {
               type="range"
               min="1000000"
               max="6000000"
+              name="sum"
               value={this.state.sum}
-              onChange={this.handleSumRangeChange}
+              onChange={this.handleChange}
               step="10000"
               className="data__range toggle_disabled"
               id="range_price"
             />
           </div>
-
-          <div
-            className={`data__item toggle_disabled ${this.state.disabledClass}`}
-          >
+          <div className={`data__item  ${this.state.disabledClass}`}>
             <h3 className="data__subtitle">Первоначальный взнос</h3>
             <input
               disabled={this.state.disabled}
-              min="5"
-              max="3600000"
               type="number"
               placeholder="0"
               value={this.state.firstpaySum}
@@ -242,20 +180,18 @@ class App extends React.Component {
               className="data__sum data__input toggle_disabled"
               id="input_firstPay"
             />
-            <textarea
-              readOnly
-              disabled={this.state.disabled}
+            <p
               className="data__attribute data__attribute_procents"
               id="procent"
               type="number"
-              // onChange={this.handleFirstProcentChange}
-              value={`${this.state.firstpay}%`}
-            ></textarea>
+            >
+              {this.state.firstpay}%
+            </p>
             <input
               disabled={this.state.disabled}
-              type="range"
               min="10"
               max="60"
+              type="range"
               step="1"
               value={this.state.firstpay}
               onChange={this.handleFirstRangeChange}
@@ -263,17 +199,14 @@ class App extends React.Component {
               id="range_firstPay"
             />
           </div>
-          <div
-            className={`data__item toggle_disabled ${this.state.disabledClass}`}
-          >
+          <div className={`data__item  ${this.state.disabledClass}`}>
             <h3 className="data__subtitle">Срок лизинга</h3>
             <input
               disabled={this.state.disabled}
-              min="1"
-              max="60"
               type="number"
+              name="months"
               value={this.state.months}
-              onChange={this.handleMonthsInputChange}
+              onChange={this.handleChange}
               placeholder="0"
               className="data__sum data__input toggle_disabled"
               id="input_months"
@@ -284,10 +217,11 @@ class App extends React.Component {
               type="range"
               min="1"
               max="60"
+              name="months"
               value={this.state.months}
-              onChange={this.handleMonthsRangeChange}
+              onChange={this.handleChange}
               step="1"
-              className="data__range toggle_disabled"
+              className="data__range"
               id="range_months"
             />
           </div>
@@ -309,15 +243,10 @@ class App extends React.Component {
               {this.state.everyMonthPay}
             </h4>
           </div>
-
           <ButtonSubmit
-            state={this.state}
-            handleSetLoading={this.handleSetLoading}
-            // onLoading={this.handleSetLoading}
             isLoading={this.state.isLoading}
-            onClick={this.handleAddPlaceSubmit}
-            disabledClass={this.state.disabledClass}
-            clickClass={this.state.clickClass}
+            state={this.state}
+            onClick={this.handleButtonClick}
           />
         </div>
       </div>
