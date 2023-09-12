@@ -1,7 +1,7 @@
-import "../index.css";
-import React from "react";
-import api from "../utils/Api";
-import ButtonSubmit from "./ButtonSubmit";
+import '../index.css';
+import React from 'react';
+import api from '../utils/Api';
+import ButtonSubmit from './ButtonSubmit';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -9,18 +9,18 @@ class App extends React.Component {
       sum: 1000000,
       firstpay: 10,
       firstpaySum: 0,
-      months: 1,
+      months: 12,
       totalSum: null,
       everyMonthPay: null,
       disabled: false,
-      disabledClass: "",
-      clickClass: "",
+      disabledClass: '',
+      clickClass: '',
       isLoading: false,
     };
   }
   handleValiditySum(state) {
     let sum = Number(state.sum);
-    if (sum > 6000000) {
+    if (sum > 60000000) {
       state.sum = 6000000;
     } else if (sum < 1000000) {
       state.sum = 1000000;
@@ -49,24 +49,38 @@ class App extends React.Component {
     } else if (sum < 1) state.months = 1;
   }
   handleChange = (evt) => {
-    const newState = this.calculate({
-      ...this.state,
-      [evt.target.name]: Number(evt.target.value),
-    });
-    this.setState(newState);
+    if (evt.target.name === 'sum' && evt.target.value < 1000000) {
+      this.setState({ sum: evt.target.value });
+    } else if (evt.target.name === 'months' && evt.target.value < 12) {
+      this.setState({ months: evt.target.value });
+    } else {
+      const newState = this.calculate({
+        ...this.state,
+        [evt.target.name]: Number(evt.target.value),
+      });
+      this.setState(newState);
+    }
   };
 
   handleFirstInputChange = (evt) => {
-    const firstPayProcent = this.getFirstPayProcent({
-      ...this.state,
-      firstpaySum: Number(evt.target.value),
-    });
-    const newState = this.calculate({
-      ...this.state,
-      firstpaySum: Number(evt.target.value),
-      firstpay: firstPayProcent,
-    });
-    this.setState(newState);
+    console.log(evt.target.value);
+    const firstSum = this.state.sum / this.state.months;
+    console.log(firstSum);
+
+    if (evt.target.value < firstSum) {
+      this.setState({ firstpaySum: Number(evt.target.value) });
+    } else {
+      const firstPayProcent = this.getFirstPayProcent({
+        ...this.state,
+        firstpaySum: Number(evt.target.value),
+      });
+      const newState = this.calculate({
+        ...this.state,
+        firstpaySum: Number(evt.target.value),
+        firstpay: firstPayProcent,
+      });
+      this.setState(newState);
+    }
   };
   handleFirstRangeChange = (evt) => {
     const firstPayRuble = this.getFirstPayRuble({
@@ -100,7 +114,7 @@ class App extends React.Component {
     this.handleValidityFirstpay(state);
     this.handleValidityMonths(state);
     this.handleValidityFirstpaySum(state);
-    if (this.state.months !== "") {
+    if (this.state.months !== '') {
     }
     let monthPay =
       (state.sum - Number(state.firstpaySum)) *
@@ -128,117 +142,118 @@ class App extends React.Component {
   };
 
   handleButtonClick = () => {
-    this.handleDisabled(true, "data__disabled", "order__submit_click");
+    this.handleDisabled(true, 'data__disabled', 'order__submit_click');
     api.addData(this.state);
     setTimeout(() => {
-      this.handleDisabled(false, "", "");
+      this.handleDisabled(false, '', '');
     }, 2000);
   };
 
   render() {
     return (
-      <div className="main">
-        <h1 className="main__title">
+      <div className='main'>
+        <h1 className='main__title'>
           Рассчитайте стоимость автомобиля в лизинг
         </h1>
-        <div className="data">
+        <div className='data'>
           <div className={`data__item  ${this.state.disabledClass}`}>
-            <h3 className="data__subtitle">Стоимость автомобиля</h3>
+            <h3 className='data__subtitle'>Стоимость автомобиля</h3>
             <input
               disabled={this.state.disabled}
-              name="sum"
-              type="number"
+              name='sum'
+              type='number'
               value={this.state.sum}
               onChange={this.handleChange}
-              placeholder="0"
-              className="data__sum data__input"
-              id="input_price"
+              placeholder='0'
+              className='data__sum data__input'
+              id='input_price'
             />
-            <p className="data__attribute data__attribute_valut">₽</p>
+            <p className='data__attribute data__attribute_valut'>₽</p>
             <input
               disabled={this.state.disabled}
-              type="range"
-              min="1000000"
-              max="6000000"
-              name="sum"
+              type='range'
+              min='1000000'
+              max='6000000'
+              name='sum'
               value={this.state.sum}
               onChange={this.handleChange}
-              step="10000"
-              className="data__range "
-              id="range_price"
+              step='10000'
+              className='data__range '
+              id='range_price'
             />
           </div>
           <div className={`data__item  ${this.state.disabledClass}`}>
-            <h3 className="data__subtitle">Первоначальный взнос</h3>
+            <h3 className='data__subtitle'>Первоначальный взнос</h3>
             <input
               disabled={this.state.disabled}
-              type="number"
-              placeholder="0"
+              type='number'
+              placeholder='0'
+              name='procents'
               value={this.state.firstpaySum}
               onChange={this.handleFirstInputChange}
-              className="data__sum data__input "
-              id="input_firstPay"
+              className='data__sum data__input '
+              id='input_firstPay'
             />
             <p
-              className="data__attribute data__attribute_procents"
-              id="procent"
-              type="number"
+              className='data__attribute data__attribute_procents'
+              id='procent'
+              type='number'
             >
               {this.state.firstpay}%
             </p>
             <input
               disabled={this.state.disabled}
-              min="10"
-              max="60"
-              type="range"
-              step="1"
+              min='10'
+              max='60'
+              type='range'
+              step='1'
               value={this.state.firstpay}
               onChange={this.handleFirstRangeChange}
-              className="data__range"
-              id="range_firstPay"
+              className='data__range'
+              id='range_firstPay'
             />
           </div>
           <div className={`data__item  ${this.state.disabledClass}`}>
-            <h3 className="data__subtitle">Срок лизинга</h3>
+            <h3 className='data__subtitle'>Срок лизинга</h3>
             <input
               disabled={this.state.disabled}
-              type="number"
-              name="months"
+              type='number'
+              name='months'
               value={this.state.months}
               onChange={this.handleChange}
-              placeholder="0"
-              className="data__sum data__input "
-              id="input_months"
+              placeholder='0'
+              className='data__sum data__input '
+              id='input_months'
             />
-            <p className="data__attribute data__attribute_valut">мес.</p>
+            <p className='data__attribute data__attribute_valut'>мес.</p>
             <input
               disabled={this.state.disabled}
-              type="range"
-              min="1"
-              max="60"
-              name="months"
+              type='range'
+              min='12'
+              max='60'
+              name='months'
               value={this.state.months}
               onChange={this.handleChange}
-              step="1"
-              className="data__range"
-              id="range_months"
+              step='1'
+              className='data__range'
+              id='range_months'
             />
           </div>
         </div>
-        <div className="order">
-          <div className="order__price">
-            <h3 className="data__subtitle order__subtitle order__subtitle_shadow">
+        <div className='order'>
+          <div className='order__price'>
+            <h3 className='data__subtitle order__subtitle order__subtitle_shadow'>
               Сумма договора лизинга
             </h3>
-            <h4 className="order__sum order__sum_shadow" id="total">
+            <h4 className='order__sum order__sum_shadow' id='total'>
               {this.state.totalSum}
             </h4>
           </div>
-          <div className="order__price">
-            <h3 className="data__subtitle order__subtitle">
+          <div className='order__price'>
+            <h3 className='data__subtitle order__subtitle'>
               Ежемесячный платеж от
             </h3>
-            <h4 className="order__sum" id="everyMonth">
+            <h4 className='order__sum' id='everyMonth'>
               {this.state.everyMonthPay}
             </h4>
           </div>
