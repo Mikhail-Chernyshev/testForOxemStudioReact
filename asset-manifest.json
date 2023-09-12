@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/testForOxemStudioReact/static/css/main.42c6d48d.css",
+    "main.js": "/testForOxemStudioReact/static/js/main.83280790.js",
+    "static/js/787.a0deb077.chunk.js": "/testForOxemStudioReact/static/js/787.a0deb077.chunk.js",
+    "static/media/Nekst-Black.woff": "/testForOxemStudioReact/static/media/Nekst-Black.f0e2921efcf1112b1749.woff",
+    "static/media/Nekst-Black.woff2": "/testForOxemStudioReact/static/media/Nekst-Black.44814bfd3ba4a266cf1d.woff2",
+    "static/media/Gilroy-Regular.woff": "/testForOxemStudioReact/static/media/Gilroy-Regular.ebe86c0337572553acea.woff",
+    "static/media/Gilroy-Regular.woff2": "/testForOxemStudioReact/static/media/Gilroy-Regular.f6c9931fabe5a6eb3307.woff2",
+    "index.html": "/testForOxemStudioReact/index.html",
+    "main.42c6d48d.css.map": "/testForOxemStudioReact/static/css/main.42c6d48d.css.map",
+    "main.83280790.js.map": "/testForOxemStudioReact/static/js/main.83280790.js.map",
+    "787.a0deb077.chunk.js.map": "/testForOxemStudioReact/static/js/787.a0deb077.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42c6d48d.css",
+    "static/js/main.83280790.js"
+  ]
+}
